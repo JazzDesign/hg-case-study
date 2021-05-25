@@ -7,6 +7,8 @@ import { Results } from '../components/Results';
 function App() {
   const [data, setData] = useState([]);
   const [enable, setEnable] = useState(true);
+
+
   const headerTitle = 'Frontend Dev CS';
   const indexLastData = 5;
   const continentValue = "EU";

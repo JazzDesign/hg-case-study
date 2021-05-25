@@ -1,18 +1,28 @@
-import React, { useState } from 'react'
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateContinent, updateMetric, updateMax } from '../redux/filterSlice';
+
+const selectContinent = state => state.continent;
+const selectMetric = state => state.metric;
+const selectMax = state => state.max;
 
 export function Filters( { enable, continents }) {
-  const [continent, setContinent] = useState('all');
-  const [metric, setMetric] = useState('all');
-  const [max, setMax] = useState('5');
+  const dispatchContinent = useDispatch();
+  const dispatchMetric = useDispatch();
+  const dispatchMax = useDispatch();
+
+  const continent = useSelector(selectContinent);
+  const metric = useSelector(selectMetric);
+  const max = useSelector(selectMax);
 
   const handleContinent = (e) =>{
-    setContinent(e.target.value);
+    dispatchContinent(updateContinent(e.target.value));
   }
   const handleMetric = (e) =>{
-    setMetric(e.target.value);
+    dispatchMetric(updateMetric(e.target.value));
   }
   const handleMax = (e) => {
-    setMax(e.target.value);
+    dispatchMax(updateMax(e.target.value));
   }
   return (
     <div>
