@@ -8,6 +8,9 @@ function App() {
   const [data, setData] = useState([]);
   const [enable, setEnable] = useState(true);
   const headerTitle = 'Frontend Dev CS';
+  const indexLastData = 5;
+  const continentValue = "EU";
+  // const resultData = data.slice(0, indexLastData);
 
   const fetchData = async () => {
     const res = await fetch('http://api.geonames.org/countryInfoJSON?formatted=true&username=hydrane');
@@ -17,12 +20,12 @@ function App() {
   }
   const handleFetch = (e) => {
     console.log("Funciona el click");
-    const getD = async () => {
+    const getData = async () => {
       const data = await fetchData();
       setData(data.geonames);
     }
 
-    getD();
+    getData();
     setEnable(false);
   }
 
@@ -45,7 +48,7 @@ function App() {
       <Filters enable={enable} continents={uniqueContinents} />
 
       {data.length > 0 &&
-        <Results data={data} />
+        <Results data={data.filter(e => e.continent === continentValue)} metric="all" max="10"/>
       }
     </div>
   );
