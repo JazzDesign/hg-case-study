@@ -1,9 +1,11 @@
 import React from 'react'
 
-export function Results() {
+export function Results( { data }) {
   return (
     <div>
-      This is results
+      {data.map(item => (
+        <p key={item.geonameId}>{item.continent}</p>
+      ))}
     </div>
   )
 }
