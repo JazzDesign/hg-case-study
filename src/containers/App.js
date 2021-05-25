@@ -44,8 +44,8 @@ function App() {
       <Header title={headerTitle} onClick={handleFetch} />
       <Filters enable={enable} continents={uniqueContinents} />
 
-      {data &&
-        <Results data={getContinents(data, 'continent')} />
+      {data.length > 0 &&
+        <Results data={data} />
       }
     </div>
   );
