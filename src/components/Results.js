@@ -1,6 +1,7 @@
 import React from 'react';
 import HighCharts from 'highcharts';
 import HighChartsReact from 'highcharts-react-official';
+import { Table } from './Table';
 
 
 
@@ -85,9 +86,7 @@ export function Results( { data, metric, max }) {
           <HighChartsReact highcharts={HighCharts} options={handleOptions(metric)} />
       )
       }
-      {data.map(item => (
-        <p key={item.geonameId}>{item.continent}</p>
-      ))}
+      <Table data={data} metric={metric} />
     </div>
   )
 }
