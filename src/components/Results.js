@@ -1,96 +1,90 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import HighCharts from 'highcharts';
 import HighChartsReact from 'highcharts-react-official';
 
+
+
 export function Results( { data, metric, max }) {
+  const getMaxValues = () => {
+    const resultData = data.slice(0, max);
+    return resultData;
+  }
 
-  const series = [];
-  data.map(e => {
+  const getOthers = (value) => {
+    const otherData = data.slice(max, data.length);
+    let sumValues = 0;
+    for(let other in otherData){
+      sumValues += parseInt(otherData[other][value]);
+    }
+    return sumValues;
+  }
+  function handleOptions(value) {
+    const maxValues = getMaxValues();
+    const series = [];
+    maxValues.map(e => {
+      series.push({
+        name: e.countryName,
+        y: parseInt(e[value]),
+      });
+      return e;
+    })
+
+    const others = getOthers(value);
     series.push({
-      name: e.countryName,
-      y: parseInt(e.population),
+      name: 'Others',
+      y: others,
     });
-    return e;
-  })
 
-  const optionsPopulation = {
-    chart: {
-      plotBackgroundColor: null,
-      plotBorderWidth: null,
-      plotShadow: false,
-      type: 'pie'
-    },
-    title: {
-      text: 'Results Population'
-    },
-    tooltip: {
-      pointFormat: '{series.name}: <b>{point.percentage:.1f} %</b>'
-    },
-    accessibility: {
-      point: {
-        valueSuffix: '%'
-      }
-    },
-    plotOptions: {
-      pie: {
-        allowPointSelect: true,
-        cursor: 'pointer',
-        dataLabels: {
-          enabled: true,
-          format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+    const options = {
+      chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+      },
+      title: {
+        text: `Results ${value}`
+      },
+      tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f} %</b>'
+      },
+      accessibility: {
+        point: {
+          valueSuffix: '%'
         }
-      }
-    },
-    series: [
-      {
-        name: 'Population',
-        data: series
-      }
-    ]
-  };
-
-  const optionsArea = {
-    chart: {
-      plotBackgroundColor: null,
-      plotBorderWidth: null,
-      plotShadow: false,
-      type: 'pie'
-    },
-    title: {
-      text: 'Results AreaInSqKm'
-    },
-    tooltip: {
-      pointFormat: '{series.name}: <b>{point.percentage:.1f} %</b>'
-    },
-    accessibility: {
-      point: {
-        valueSuffix: '%'
-      }
-    },
-    plotOptions: {
-      pie: {
-        allowPointSelect: true,
-        cursor: 'pointer',
-        dataLabels: {
-          enabled: true,
-          format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+      },
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          dataLabels: {
+            enabled: true,
+            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+          }
         }
-      }
-    },
-    series: [
-      {
-        name: 'AreaInSqKm',
-        data: series
-      }
-    ]
-  };
+      },
+      series: [
+        {
+          name: `${value}`,
+          data: series
+        }
+      ]
+    };
 
-  console.log(series);
+    return options;
+  }
+
   return (
     <div>
-
-      <HighChartsReact highcharts={HighCharts} options={optionsPopulation} />
-      <HighChartsReact highcharts={HighCharts} options={optionsArea} />
+      {(metric === 'all') ? (
+        <>
+          <HighChartsReact highcharts={HighCharts} options={handleOptions('areaInSqKm')} />
+          <HighChartsReact highcharts={HighCharts} options={handleOptions('population')} />
+        </>
+      ) : (
+          <HighChartsReact highcharts={HighCharts} options={handleOptions(metric)} />
+      )
+      }
       {data.map(item => (
         <p key={item.geonameId}>{item.continent}</p>
       ))}

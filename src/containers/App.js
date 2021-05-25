@@ -1,18 +1,22 @@
 import '../assets/styles/App.css';
+import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { Header } from '../components/Header';
 import { Filters } from '../components/Filters';
 import { Results } from '../components/Results';
 
+const selectContinent = state => state.filter.continent;
+const selectMetric = state => state.filter.metric;
+const selectMax = state => state.filter.max;
+
 function App() {
   const [data, setData] = useState([]);
   const [enable, setEnable] = useState(true);
 
-
   const headerTitle = 'Frontend Dev CS';
-  const indexLastData = 5;
-  const continentValue = "EU";
-  // const resultData = data.slice(0, indexLastData);
+  const continent = useSelector(selectContinent);
+  const metric = useSelector(selectMetric);
+  const max = useSelector(selectMax);
 
   const fetchData = async () => {
     const res = await fetch('http://api.geonames.org/countryInfoJSON?formatted=true&username=hydrane');
@@ -20,13 +24,13 @@ function App() {
 
     return data;
   }
+
   const handleFetch = (e) => {
     console.log("Funciona el click");
     const getData = async () => {
       const data = await fetchData();
       setData(data.geonames);
     }
-
     getData();
     setEnable(false);
   }
@@ -48,9 +52,8 @@ function App() {
     <div className="App">
       <Header title={headerTitle} onClick={handleFetch} />
       <Filters enable={enable} continents={uniqueContinents} />
-
       {data.length > 0 &&
-        <Results data={data.filter(e => e.continent === continentValue)} metric="all" max="10"/>
+        <Results data={(continent === "all") ? data : data.filter(e => e.continent === continent)} metric={metric} max={max} />
       }
     </div>
   );

@@ -2,9 +2,9 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateContinent, updateMetric, updateMax } from '../redux/filterSlice';
 
-const selectContinent = state => state.continent;
-const selectMetric = state => state.metric;
-const selectMax = state => state.max;
+const selectContinent = state => state.filter.continent;
+const selectMetric = state => state.filter.metric;
+const selectMax = state => state.filter.max;
 
 export function Filters( { enable, continents }) {
   const dispatchContinent = useDispatch();
@@ -36,7 +36,7 @@ export function Filters( { enable, continents }) {
 
       <select disabled={enable} value={metric} onChange={handleMetric}>
           <option value="all">ALL</option>
-          <option value="area">areaInSqKm</option>
+          <option value="areaInSqKm">areaInSqKm</option>
           <option value="population">Population</option>
         </select>
 
