@@ -23,9 +23,6 @@ function App() {
   const fetchData = async () => {
     const res = await fetch('http://api.geonames.org/countryInfoJSON?formatted=true&username=hydrane', {
       'mode': 'cors',
-      'headers': {
-        'Access-Control-Allow-Origin': '*',
-      }
     });
     const data = res.json();
 
