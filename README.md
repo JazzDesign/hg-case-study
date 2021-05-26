@@ -1,5 +1,5 @@
 # Frontend Dev CS
-Case Study from Homa GameS
+Case Study from Homa Games
 
 ## 📱 Screenshot
 
@@ -9,7 +9,7 @@ Case Study from Homa GameS
 ## 📚 Technical Details
 ```
 Built entirely:
-- ReactJs
+- ReactJs, React Hooks, Redux
 ```
 
 ## ⚒ Deploy 
