@@ -1,5 +1,5 @@
 # Frontend Dev CS
-Case Study from Homa Game
+Case Study from Homa GameS
 
 ## 📱 Screenshot
 
