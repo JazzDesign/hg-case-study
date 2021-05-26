@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.c90ae773.chunk.css",
-    "main.js": "/static/js/main.923239b4.chunk.js",
-    "main.js.map": "/static/js/main.923239b4.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.bfddaa84.js",
-    "runtime-main.js.map": "/static/js/runtime-main.bfddaa84.js.map",
-    "static/js/2.0ca02326.chunk.js": "/static/js/2.0ca02326.chunk.js",
-    "static/js/2.0ca02326.chunk.js.map": "/static/js/2.0ca02326.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.c90ae773.chunk.css.map": "/static/css/main.c90ae773.chunk.css.map",
-    "static/js/2.0ca02326.chunk.js.LICENSE.txt": "/static/js/2.0ca02326.chunk.js.LICENSE.txt"
+    "main.css": "/hg-case-study/static/css/main.c90ae773.chunk.css",
+    "main.js": "/hg-case-study/static/js/main.923239b4.chunk.js",
+    "main.js.map": "/hg-case-study/static/js/main.923239b4.chunk.js.map",
+    "runtime-main.js": "/hg-case-study/static/js/runtime-main.ce753bb5.js",
+    "runtime-main.js.map": "/hg-case-study/static/js/runtime-main.ce753bb5.js.map",
+    "static/js/2.0ca02326.chunk.js": "/hg-case-study/static/js/2.0ca02326.chunk.js",
+    "static/js/2.0ca02326.chunk.js.map": "/hg-case-study/static/js/2.0ca02326.chunk.js.map",
+    "index.html": "/hg-case-study/index.html",
+    "static/css/main.c90ae773.chunk.css.map": "/hg-case-study/static/css/main.c90ae773.chunk.css.map",
+    "static/js/2.0ca02326.chunk.js.LICENSE.txt": "/hg-case-study/static/js/2.0ca02326.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.bfddaa84.js",
+    "static/js/runtime-main.ce753bb5.js",
     "static/js/2.0ca02326.chunk.js",
     "static/css/main.c90ae773.chunk.css",
     "static/js/main.923239b4.chunk.js"
