@@ -1,6 +1,7 @@
-import '../assets/styles/App.css';
-import { useSelector } from 'react-redux';
 import { useState } from 'react';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import '../assets/styles/App.css';
 import { Header } from '../components/Header';
 import { Filters } from '../components/Filters';
 import { Results } from '../components/Results';
@@ -21,12 +22,8 @@ function App() {
   const max = useSelector(selectMax);
 
   const fetchData = async () => {
-    const res = await fetch('http://api.geonames.org/countryInfoJSON?formatted=true&username=hydrane', {
-      'mode': 'cors',
-    });
-    const data = res.json();
-
-    return data;
+    const res = await axios.get("https://cors-anywhere.herokuapp.com/http://api.geonames.org/countryInfoJSON?formatted=true&username=hydrane");
+    return res.data;
   }
 
   const handleFetch = (e) => {
