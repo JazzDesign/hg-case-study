@@ -5,14 +5,16 @@ import { Table } from './Table';
 
 
 
-export function Results( { data, metric, max }) {
+export function Results( { data, continent, metric, max, onOrder }) {
+  const filterData = (continent === "all") ? data : data.filter(e => e.continent === continent)
   const getMaxValues = () => {
-    const resultData = data.slice(0, max);
+    const resultData = filterData.slice(0, max);
     return resultData;
   }
 
   const getOthers = (value) => {
-    const otherData = data.slice(max, data.length);
+
+    const otherData = filterData.slice(max, filterData.length);
     let sumValues = 0;
     for(let other in otherData){
       sumValues += parseInt(otherData[other][value]);
@@ -75,6 +77,7 @@ export function Results( { data, metric, max }) {
     return options;
   }
 
+
   return (
     <div>
       {(metric === 'all') ? (
@@ -86,7 +89,11 @@ export function Results( { data, metric, max }) {
           <HighChartsReact highcharts={HighCharts} options={handleOptions(metric)} />
       )
       }
-      <Table data={data} metric={metric} />
+      {(continent === 'all') ? (
+        <Table data={data} metric={metric} onOrder={onOrder}/>
+      ) : (
+          <Table data={filterData} metric={metric} onOrder={onOrder} />
+      )}
     </div>
   )
 }

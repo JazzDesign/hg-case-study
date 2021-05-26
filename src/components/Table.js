@@ -1,15 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../assets/styles/components/Table.css';
 
-export function Table({ data, metric }) {
+export function Table({ data, metric, onOrder }) {
+  const [toggleAsc, setToggleAsc] = useState(true);
+
+  const handleOrder = (value) => {
+    onOrder(toggleAsc, value);
+    setToggleAsc(!toggleAsc);
+  }
+
+  const getValues = (value) => {
+    let sumValues = 0;
+    for (let item in data) {
+      sumValues += parseInt(data[item][value]);
+    }
+    return sumValues;
+  }
 
   function tableHeader () {
     return(
       <tr>
-        <th>Continent Name</th>
-        <th>Country Name</th>
-        <th>Population</th>
-        <th>AreaInSqKm</th>
+        <th><button onClick={() => handleOrder('continent')}>Continent Name</button></th>
+        <th><button onClick={() => handleOrder('countryName')}>Country Name</button></th>
+        {metric === 'all' ? (
+          <>
+            <th><button onClick={() => handleOrder('population')}>population</button></th>
+            <th><button onClick={() => handleOrder('areaInSqKm')}>areaInSqKm</button></th>
+          </>
+        ) : (
+
+            <th><button onClick={() => handleOrder(`${metric}`)}>{metric}</button></th>
+        )
+
+        }
       </tr>
     );
   }
@@ -21,8 +44,14 @@ export function Table({ data, metric }) {
         <tr key={geonameId}>
           <td>{continent}</td>
           <td>{countryName}</td>
-          <td>{population}</td>
-          <td>{areaInSqKm}</td>
+          {metric === 'all' ? (
+            <>
+              <td>{population}</td>
+              <td>{areaInSqKm}</td>
+            </>
+          ) : (
+              <td>{element[metric]}</td>
+          )}
         </tr>
       );
     })
@@ -31,12 +60,26 @@ export function Table({ data, metric }) {
   return (
     <div>
       <table>
-        <tbody>
+        <thead>
           {tableHeader()}
+        </thead>
+        <tbody>
           {tableData()}
         </tbody>
+        <tfoot>
+          <tr>
+            <td colSpan="2">TOTAL</td>
+            {metric === 'all' ? (
+              <>
+                <td>{getValues('population')}</td>
+                <td>{getValues('areaInSqKm')}</td>
+              </>
+            ) : (
+                <td>{getValues(`${metric}`)}</td>
+            )}
+          </tr>
+        </tfoot>
       </table>
-      this is table
     </div>
   )
 }
