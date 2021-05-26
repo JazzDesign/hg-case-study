@@ -2,6 +2,7 @@ import React from 'react';
 import HighCharts from 'highcharts';
 import HighChartsReact from 'highcharts-react-official';
 import { Table } from './Table';
+import '../assets/styles/components/Results.css';
 
 
 
@@ -79,12 +80,12 @@ export function Results( { data, continent, metric, max, onOrder }) {
 
 
   return (
-    <div>
+    <div className="results">
       {(metric === 'all') ? (
-        <>
-          <HighChartsReact highcharts={HighCharts} options={handleOptions('areaInSqKm')} />
+        <div className="chart-container">
           <HighChartsReact highcharts={HighCharts} options={handleOptions('population')} />
-        </>
+          <HighChartsReact highcharts={HighCharts} options={handleOptions('areaInSqKm')} />
+        </div>
       ) : (
           <HighChartsReact highcharts={HighCharts} options={handleOptions(metric)} />
       )

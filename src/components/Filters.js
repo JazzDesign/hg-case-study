@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateContinent, updateMetric, updateMax } from '../redux/filterSlice';
+import '../assets/styles/components/Filters.css';
 
 const selectContinent = state => state.filter.continent;
 const selectMetric = state => state.filter.metric;
@@ -25,8 +26,8 @@ export function Filters( { enable, continents }) {
     dispatchMax(updateMax(e.target.value));
   }
   return (
-    <div>
-
+    <div className="filters">
+      <h3>Filters</h3>
         <select value={continent} disabled={enable} onChange={handleContinent} >
           <option value="all">ALL</option>
           {continents.map(continent => (

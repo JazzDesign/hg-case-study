@@ -1,11 +1,11 @@
 import React from 'react';
 import '../assets/styles/components/Header.css';
 
-export function Header( { title, onClick, enable }) {
+export function Header( { title, onClick }) {
   return (
     <div className="header">
       <h1>{title}</h1>
-      <button onClick={onClick}>{enable ? 'Go' : 'Reset'}</button>
+      <button className="btn" onClick={onClick}>GO</button>
     </div>
   )
 }

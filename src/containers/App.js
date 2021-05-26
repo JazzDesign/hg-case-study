@@ -28,7 +28,6 @@ function App() {
   }
 
   const handleFetch = (e) => {
-    console.log("Funciona el click");
     const getData = async () => {
       const data = await fetchData();
       setData(data.geonames);
@@ -38,12 +37,12 @@ function App() {
   }
 
   const getContinents = (arr, value) => {
-    const unique = arr
+    const uniqueValues = arr
       .map(e => e[value])
       .map((e, i, final) => final.indexOf(e) === i && i)
       .filter(e => arr[e])
       .map(e => arr[e]);
-    return unique;
+    return uniqueValues;
   }
 
   const uniqueContinents = getContinents(data, 'continent').map(e => e.continent);
@@ -56,10 +55,10 @@ function App() {
     })
     setData(newData);
   }
-  // (continent === "all") ? data : data.filter(e => e.continent === continent)
+
   return (
     <div className="App">
-      <Header title={headerTitle} onClick={handleFetch} enable={enable} />
+      <Header title={headerTitle} onClick={handleFetch} />
       <Filters enable={enable} continents={uniqueContinents} />
       {data.length > 0 &&
         <Results data={data} continent={continent} metric={metric} max={max} onOrder={onOrder} />

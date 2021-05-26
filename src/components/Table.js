@@ -68,7 +68,7 @@ export function Table({ data, metric, onOrder }) {
         </tbody>
         <tfoot>
           <tr>
-            <td colSpan="2">TOTAL</td>
+            <td colSpan="2"><strong>TOTAL</strong></td>
             {metric === 'all' ? (
               <>
                 <td>{getValues('population')}</td>
